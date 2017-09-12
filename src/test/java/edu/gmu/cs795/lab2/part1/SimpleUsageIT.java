@@ -11,7 +11,7 @@ public class SimpleUsageIT {
 	
 	@Test
 	public void testTaintedPrimitive() throws Exception {
-		int i = MultiTainter.taintedInt(5, "This is some variable i ");
+		int i = MultiTainter.taintedInt(5, "Mwahaha ");
 		int j = i + 5;
 		int k = 10;
 		if(j > 0)

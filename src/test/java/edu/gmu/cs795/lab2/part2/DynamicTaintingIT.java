@@ -8,11 +8,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.columbia.cs.psl.phosphor.runtime.MultiTainter;
+import edu.columbia.cs.psl.phosphor.runtime.Taint;
 
 public class DynamicTaintingIT {
 
 	@Test
-	@Ignore
 	public void testDynamicTainting() throws Exception {
 		int i = getTaintedInt();
 		int[] ar = getTaintedIntArray();
@@ -20,6 +20,16 @@ public class DynamicTaintingIT {
 		assertNotNull(MultiTainter.getTaint(ar[0]));
 	}
 	
+	public static void checkTaint(Taint in)
+	{
+		if(in == null)
+			System.err.println("Uh oh, tag is null!");
+	}
+	private static void assertEquals(int actual, int expected)
+	{
+		checkTaint(MultiTainter.getTaint(expected));
+		//Whatever assert does usually
+	}
 	public int getTaintedInt()
 	{
 		return 100;
@@ -27,6 +37,7 @@ public class DynamicTaintingIT {
 	
 	public int[] getTaintedIntArray()
 	{
-		return new int[]{0,1,2,3,4,5,6,7,8,9};
+//		return MultiTainter.taintedIntArray(new int[10], "lbl");
+		return new int[]{0,1,2,3,4,5,6,7,8,9}; 
 	}
 }
